@@ -3,6 +3,7 @@ package ca.mcgill.ecse211.lab2;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
+import lejos.hardware.sensor.EV3ColorSensor;
 
 /**
  * This class is used to define static resources in one place for easy access and to avoid 

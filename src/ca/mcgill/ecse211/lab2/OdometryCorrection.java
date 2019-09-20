@@ -1,6 +1,7 @@
 package ca.mcgill.ecse211.lab2;
 
 import static ca.mcgill.ecse211.lab2.Resources.*;
+import lejos.robotics.SampleProvider;
 
 public class OdometryCorrection implements Runnable {
   private static final long CORRECTION_PERIOD = 10;
@@ -10,6 +11,9 @@ public class OdometryCorrection implements Runnable {
    */
   public void run() {
     long correctionStart, correctionEnd;
+    
+    SampleProvider colorSensorSensorProvider = COLOR_SENSOR.getRedMode(); // Create a sample provider and a sample array.
+    float[] colorSample = new float[colorSensorSensorProvider.sampleSize()];
 
     while (true) {
       correctionStart = System.currentTimeMillis();
