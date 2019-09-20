@@ -118,7 +118,7 @@ public class Odometer implements Runnable {
       double distanceDifferential = distanceL - distanceR; // Difference between the distance traveled by the two wheels.
       double deltaT = distanceDifferential / TRACK; // Arctan angle approximation to calculate the angle differential.
       
-      double displacementMagnitude = distanceL + distanceR / 2; // Calculate the magnitude of the total displacement.
+      double displacementMagnitude = (distanceL + distanceR) / 2; // Calculate the magnitude of the total displacement.
       double deltaX = displacementMagnitude * Math.sin(deltaT); // X axis displacement.
       double deltaY = displacementMagnitude * Math.cos(deltaT); // Y axis displacement.
       
