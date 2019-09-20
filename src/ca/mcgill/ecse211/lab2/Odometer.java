@@ -118,11 +118,14 @@ public class Odometer implements Runnable {
       double distanceDifferential = distanceL - distanceR; // Difference between the distance traveled by the two wheels.
       double deltaT = distanceDifferential / TRACK; // Arctan angle approximation to calculate the angle differential.
       
-      double displacementMagnitude = (distanceL + distanceR) / 2; // Calculate the magnitude of the total displacement.
-      double deltaX = displacementMagnitude * Math.sin(deltaT); // X axis displacement.
-      double deltaY = displacementMagnitude * Math.cos(deltaT); // Y axis displacement.
+      double[] position = getXYT(); // Get the current angle.
+      double currentAngle = position[2];
       
-      update(deltaX,deltaY,Math.toDegrees(deltaT)); // Update position.
+      double displacementMagnitude = (distanceL + distanceR) / 2; // Calculate the magnitude of the total displacement.
+      double deltaX = displacementMagnitude * Math.sin(deltaT + Math.toRadians(currentAngle)); // X axis displacement using angle and magnitude.
+      double deltaY = displacementMagnitude * Math.cos(deltaT + Math.toRadians(currentAngle)); // Y axis displacement using angle and magnitude.
+      
+      update(deltaX, deltaY, Math.toDegrees(deltaT)); // Update position.
 
       // this ensures that the odometer only runs once every period
       updateEnd = System.currentTimeMillis();
