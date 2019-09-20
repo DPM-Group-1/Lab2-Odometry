@@ -108,7 +108,10 @@ public class Odometer implements Runnable {
       rightMotorTachoCount = rightMotor.getTachoCount();
       
       int leftMotorRotationAngle = leftMotorTachoCount - lastLeftMotorTachoCount;
-      int rightMotorRotationAngle = leftMotorTachoCount - lastLeftMotorTachoCount;
+      int rightMotorRotationAngle = rightMotorTachoCount - lastRightMotorTachoCount;
+      
+      lastLeftMotorTachoCount = leftMotorTachoCount;
+      lastRightMotorTachoCount = rightMotorTachoCount;
       
       double distanceL = WHEEL_RAD * Math.PI * leftMotorRotationAngle / 180; // Distance traveled by left wheel.
       double distanceR = WHEEL_RAD * Math.PI * rightMotorRotationAngle / 180; // Distance traveled by right wheel.
@@ -119,12 +122,7 @@ public class Odometer implements Runnable {
       double deltaX = displacementMagnitude * Math.sin(deltaT); // X axis displacement.
       double deltaY = displacementMagnitude * Math.cos(deltaT); // Y axis displacement.
       
-      double[] position = getXYT();
-      double newX = position[0] + deltaX;
-      double newY = position[1] + deltaY;
-      double newT = position[2] + deltaT;
-      
-      update(newX,newY,newT); // Update position.
+      update(deltaX,deltaY,Math.toDegrees(deltaT)); // Update position.
 
       // this ensures that the odometer only runs once every period
       updateEnd = System.currentTimeMillis();
