@@ -39,6 +39,12 @@ public class Odometer implements Runnable {
    * The (x, y, theta) position as an array
    */
   private double[] position;
+  
+  /**
+   * Last tachometer count of the left and right motor.
+   */
+  private static int lastLeftMotorTachoCount = 0;
+  private static int lastRightMotorTachoCount = 0;
 
   // Thread control tools
   /**
@@ -100,11 +106,26 @@ public class Odometer implements Runnable {
 
       leftMotorTachoCount = leftMotor.getTachoCount();
       rightMotorTachoCount = rightMotor.getTachoCount();
-
-      // TODO Calculate new robot position based on tachometer counts
       
-      // TODO Update odometer values with new calculated values, eg
-      //odo.update(dx, dy, dtheta);
+      int leftMotorRotationAngle = leftMotorTachoCount - lastLeftMotorTachoCount;
+      int rightMotorRotationAngle = rightMotorTachoCount - lastRightMotorTachoCount;
+      
+      lastLeftMotorTachoCount = leftMotorTachoCount;
+      lastRightMotorTachoCount = rightMotorTachoCount;
+      
+      double distanceL = WHEEL_RAD * Math.PI * leftMotorRotationAngle / 180; // Distance traveled by left wheel.
+      double distanceR = WHEEL_RAD * Math.PI * rightMotorRotationAngle / 180; // Distance traveled by right wheel.
+      double distanceDifferential = distanceL - distanceR; // Difference between the distance traveled by the two wheels.
+      double deltaT = distanceDifferential / TRACK; // Arctan angle approximation to calculate the angle differential.
+      
+      double[] position = getXYT(); // Get the current angle.
+      double currentAngle = position[2];
+      
+      double displacementMagnitude = (distanceL + distanceR) / 2; // Calculate the magnitude of the total displacement.
+      double deltaX = displacementMagnitude * Math.sin(deltaT + Math.toRadians(currentAngle)); // X axis displacement using angle and magnitude.
+      double deltaY = displacementMagnitude * Math.cos(deltaT + Math.toRadians(currentAngle)); // Y axis displacement using angle and magnitude.
+      
+      update(deltaX, deltaY, Math.toDegrees(deltaT)); // Update position.
 
       // this ensures that the odometer only runs once every period
       updateEnd = System.currentTimeMillis();

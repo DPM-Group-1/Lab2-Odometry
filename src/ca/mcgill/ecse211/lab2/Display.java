@@ -1,7 +1,6 @@
 package ca.mcgill.ecse211.lab2;
 
 import java.text.DecimalFormat;
-import lejos.hardware.lcd.TextLCD;
 
 //static import to avoid duplicating variables and make the code easier to read
 import static ca.mcgill.ecse211.lab2.Resources.*;
