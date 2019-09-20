@@ -39,13 +39,13 @@ public class Main {
 
     if (buttonChoice == Button.ID_LEFT) {
       // Float the motors
-      leftMotor.forward();
-      leftMotor.flt();
-      rightMotor.forward();
-      rightMotor.flt();
+      LEFT_MOTOR.forward();
+      LEFT_MOTOR.flt();
+      RIGHT_MOTOR.forward();
+      RIGHT_MOTOR.flt();
 
       // Display changes in position as wheels are (manually) moved
-      new Thread(odometer).start();
+      new Thread(ODOMETER).start();
       new Thread(display).start();
 
     } else {
@@ -60,7 +60,7 @@ public class Main {
 
       buttonChoice = Button.waitForAnyPress();
 
-      new Thread(odometer).start();
+      new Thread(ODOMETER).start();
       new Thread(display).start();
 
       if (buttonChoice == Button.ID_RIGHT) {

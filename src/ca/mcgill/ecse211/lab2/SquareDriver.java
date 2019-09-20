@@ -14,10 +14,10 @@ public class SquareDriver {
    */
   public static void drive() {
     // reset the motors
-    leftMotor.stop();
-    rightMotor.stop();
-    leftMotor.setAcceleration(3000);
-    rightMotor.setAcceleration(3000);
+    LEFT_MOTOR.stop();
+    RIGHT_MOTOR.stop();
+    LEFT_MOTOR.setAcceleration(3000);
+    RIGHT_MOTOR.setAcceleration(3000);
     
 
     // Sleep for 2 seconds
@@ -25,18 +25,18 @@ public class SquareDriver {
 
     for (int i = 0; i < 4; i++) {
       // drive forward three tiles
-      leftMotor.setSpeed(FORWARD_SPEED);
-      rightMotor.setSpeed(FORWARD_SPEED);
+      LEFT_MOTOR.setSpeed(FORWARD_SPEED);
+      RIGHT_MOTOR.setSpeed(FORWARD_SPEED);
 
-      leftMotor.rotate(convertDistance(3 * TILE_SIZE), true);
-      rightMotor.rotate(convertDistance(3 * TILE_SIZE), false);
+      LEFT_MOTOR.rotate(convertDistance(3 * TILE_SIZE), true);
+      RIGHT_MOTOR.rotate(convertDistance(3 * TILE_SIZE), false);
 
       // turn 90 degrees clockwise
-      leftMotor.setSpeed(ROTATE_SPEED);
-      rightMotor.setSpeed(ROTATE_SPEED);
+      LEFT_MOTOR.setSpeed(ROTATE_SPEED);
+      RIGHT_MOTOR.setSpeed(ROTATE_SPEED);
 
-      leftMotor.rotate(convertAngle(90.0), true);
-      rightMotor.rotate(-convertAngle(90.0), false);
+      LEFT_MOTOR.rotate(convertAngle(90.0), true);
+      RIGHT_MOTOR.rotate(-convertAngle(90.0), false);
     }
   }
 

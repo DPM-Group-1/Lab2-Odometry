@@ -104,8 +104,8 @@ public class Odometer implements Runnable {
     while (true) {
       updateStart = System.currentTimeMillis();
 
-      leftMotorTachoCount = leftMotor.getTachoCount();
-      rightMotorTachoCount = rightMotor.getTachoCount();
+      leftMotorTachoCount = LEFT_MOTOR.getTachoCount();
+      rightMotorTachoCount = RIGHT_MOTOR.getTachoCount();
       
       int leftMotorRotationAngle = leftMotorTachoCount - lastLeftMotorTachoCount;
       int rightMotorRotationAngle = rightMotorTachoCount - lastRightMotorTachoCount;

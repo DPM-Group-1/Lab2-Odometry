@@ -40,14 +40,20 @@ public class Resources {
   /**
    * The left motor.
    */
-  public static final EV3LargeRegulatedMotor leftMotor =
+  public static final EV3LargeRegulatedMotor LEFT_MOTOR =
       new EV3LargeRegulatedMotor(LocalEV3.get().getPort("A"));
 
   /**
    * The right motor.
    */
-  public static final EV3LargeRegulatedMotor rightMotor =
+  public static final EV3LargeRegulatedMotor RIGHT_MOTOR =
       new EV3LargeRegulatedMotor(LocalEV3.get().getPort("D"));
+  
+  /**
+   * The color sensor.
+   */
+  public static final EV3ColorSensor COLOR_SENSOR =
+      new EV3ColorSensor(LocalEV3.get().getPort("S1"));
 
   /**
    * The LCD.
@@ -57,6 +63,6 @@ public class Resources {
   /**
    * The odometer.
    */
-  public static Odometer odometer = Odometer.getOdometer();
+  public static Odometer ODOMETER = Odometer.getOdometer();
   
 }
