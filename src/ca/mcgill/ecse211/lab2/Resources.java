@@ -21,7 +21,7 @@ public class Resources {
   /**
    * The robot width in centimeters.
    */
-  public static final double TRACK = 15;
+  public static final double TRACK = 15.4;
   
   /**
    * The speed at which the robot moves forward in degrees per second.
@@ -37,6 +37,11 @@ public class Resources {
    * The tile size in centimeters.
    */
   public static final double TILE_SIZE = 30.48;
+  
+  /**
+   * Minimum intensity differential between dark lines and light floor.
+   */
+  public static final double MIN_INTENSITY_DIFF = -5;
   
   /**
    * The left motor.
