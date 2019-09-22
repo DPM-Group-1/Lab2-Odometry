@@ -29,32 +29,32 @@ public class OdometryCorrection implements Runnable {
         Sound.beep(); // TODO Remove beep.
         
         double[] position = ODOMETER.getXYT(); // Get position to identify which line has been crossed.
-        double correctedXPos = position[0];
+        double correctedXPos = position[0]; // Initialize correction.
         double correctedYPos = position[1];
         
-        if ( (position[2] > 315 && position[2] < 45) || (position[2] > 135 && position[2] < 225) ) { // Along Y axis.
-          if (position[1] < TILE_SIZE * 1.5) {
-            correctedYPos = 1*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.cos(Math.toRadians(position[2])));
-          } else if (position[1] < TILE_SIZE * 2.5) {
+        if ( (position[2] > 315 && position[2] < 360) || (position[2] > 0 && position[2] < 45) || (position[2] > 135 && position[2] < 225) ) { // Along Y axis.
+          if (position[1] < TILE_SIZE * 1.5) { // If closer to first line...
+            correctedYPos = 1*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.cos(Math.toRadians(position[2]))); // Correct Y while taking into account sensor offset.
+          } else if (position[1] < TILE_SIZE * 2.5) { // ...to second line...
             correctedYPos = 2*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.cos(Math.toRadians(position[2])));
-          } else {
+          } else { // ...or the third line.
             correctedYPos = 3*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.cos(Math.toRadians(position[2])));
           }
         } else { // Along X axis.
-          if (position[0] < TILE_SIZE * 1.5) {
-            correctedYPos = 1*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.sin(Math.toRadians(position[2])));
-          } else if (position[0] < TILE_SIZE * 2.5) {
-            correctedYPos = 2*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.sin(Math.toRadians(position[2])));
-          } else {
-            correctedYPos = 3*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.sin(Math.toRadians(position[2])));
+          if (position[0] < TILE_SIZE * 1.5) { // If closer to first line...
+            correctedXPos = 1*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.sin(Math.toRadians(position[2]))); // Correct X while taking into account sensor offset.
+          } else if (position[0] < TILE_SIZE * 2.5) { // ...to second line...
+            correctedXPos = 2*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.sin(Math.toRadians(position[2])));
+          } else { // ...or the third line.
+            correctedXPos = 3*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.sin(Math.toRadians(position[2])));
           }
         }
         
-        ODOMETER.setXYT(correctedXPos, correctedYPos, position[2]);
+        ODOMETER.setXYT(correctedXPos, correctedYPos, position[2]); // Correct odometer.
           
       }
       
-      lastSample[0] = colorSample[0];
+      lastSample[0] = colorSample[0]; // Keep current value for next loop.
 
       // this ensures the odometry correction occurs only once every period
       correctionEnd = System.currentTimeMillis();
