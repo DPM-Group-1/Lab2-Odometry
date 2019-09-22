@@ -3,9 +3,10 @@ package ca.mcgill.ecse211.lab2;
 import static ca.mcgill.ecse211.lab2.Resources.*;
 import lejos.robotics.SampleProvider;
 import lejos.robotics.filter.MedianFilter;
+import lejos.hardware.Sound;
 
 public class OdometryCorrection implements Runnable {
-  private static final long CORRECTION_PERIOD = 10;
+  private static final long CORRECTION_PERIOD = 100;
 
   /*
    * Here is where the odometer correction code should be run.
@@ -23,7 +24,9 @@ public class OdometryCorrection implements Runnable {
       
       colorSensorSensorProvider.fetchSample(colorSample, 0); // Get a sample.
       
-      if (colorSample[0] - lastSample[0] < MIN_INTENSITY_DIFF) {
+      if (colorSample[0] - lastSample[0] < MIN_INTENSITY_DIFF) { // If the ground is dark than in previous samplings...
+        
+        Sound.beep();
         
         // TODO Calculate new (accurate) robot position
   
@@ -32,7 +35,7 @@ public class OdometryCorrection implements Runnable {
           
       }
       
-      lastSample = colorSample;
+      lastSample[0] = colorSample[0];
 
       // this ensures the odometry correction occurs only once every period
       correctionEnd = System.currentTimeMillis();

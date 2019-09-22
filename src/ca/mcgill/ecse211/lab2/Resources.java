@@ -26,7 +26,7 @@ public class Resources {
   /**
    * The speed at which the robot moves forward in degrees per second.
    */
-  public static final int FORWARD_SPEED = 250;
+  public static final int FORWARD_SPEED = 150;
   
   /**
    * The speed at which the robot rotates in degrees per second.
@@ -41,7 +41,12 @@ public class Resources {
   /**
    * Minimum intensity differential between dark lines and light floor.
    */
-  public static final double MIN_INTENSITY_DIFF = -5;
+  public static final double MIN_INTENSITY_DIFF = -0.045;
+  
+  /**
+   * Color sensor offset with wheel base in centimeters.
+   */
+  public static final double COLOR_SENSOR_OFFSET = -0.03;
   
   /**
    * The left motor.
