@@ -25,7 +25,7 @@ public class Display implements Runnable {
       updateStart = System.currentTimeMillis();
 
       // Retrieve x, y and Theta information
-      position = odometer.getXYT();
+      position = ODOMETER.getXYT();
       
       // Print x,y, and theta information
       DecimalFormat numberFormat = new DecimalFormat("######0.00");

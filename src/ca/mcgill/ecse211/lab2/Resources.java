@@ -3,6 +3,7 @@ package ca.mcgill.ecse211.lab2;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
+import lejos.hardware.sensor.EV3ColorSensor;
 
 /**
  * This class is used to define static resources in one place for easy access and to avoid 
@@ -20,12 +21,12 @@ public class Resources {
   /**
    * The robot width in centimeters.
    */
-  public static final double TRACK = 15;
+  public static final double TRACK = 15.4;
   
   /**
    * The speed at which the robot moves forward in degrees per second.
    */
-  public static final int FORWARD_SPEED = 250;
+  public static final int FORWARD_SPEED = 150;
   
   /**
    * The speed at which the robot rotates in degrees per second.
@@ -38,16 +39,32 @@ public class Resources {
   public static final double TILE_SIZE = 30.48;
   
   /**
+   * Minimum intensity differential between dark lines and light floor.
+   */
+  public static final double MIN_INTENSITY_DIFF = -0.045;
+  
+  /**
+   * Color sensor offset with wheel base in centimeters.
+   */
+  public static final double COLOR_SENSOR_OFFSET = 1.905;
+  
+  /**
    * The left motor.
    */
-  public static final EV3LargeRegulatedMotor leftMotor =
+  public static final EV3LargeRegulatedMotor LEFT_MOTOR =
       new EV3LargeRegulatedMotor(LocalEV3.get().getPort("A"));
 
   /**
    * The right motor.
    */
-  public static final EV3LargeRegulatedMotor rightMotor =
+  public static final EV3LargeRegulatedMotor RIGHT_MOTOR =
       new EV3LargeRegulatedMotor(LocalEV3.get().getPort("D"));
+  
+  /**
+   * The color sensor.
+   */
+  public static final EV3ColorSensor COLOR_SENSOR =
+      new EV3ColorSensor(LocalEV3.get().getPort("S1"));
 
   /**
    * The LCD.
@@ -57,6 +74,6 @@ public class Resources {
   /**
    * The odometer.
    */
-  public static Odometer odometer = Odometer.getOdometer();
+  public static Odometer ODOMETER = Odometer.getOdometer();
   
 }
