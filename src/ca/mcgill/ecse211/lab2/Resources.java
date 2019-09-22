@@ -46,7 +46,7 @@ public class Resources {
   /**
    * Color sensor offset with wheel base in centimeters.
    */
-  public static final double COLOR_SENSOR_OFFSET = -0.03;
+  public static final double COLOR_SENSOR_OFFSET = 1.905;
   
   /**
    * The left motor.

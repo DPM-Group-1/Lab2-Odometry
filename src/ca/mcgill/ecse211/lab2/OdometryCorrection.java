@@ -3,7 +3,7 @@ package ca.mcgill.ecse211.lab2;
 import static ca.mcgill.ecse211.lab2.Resources.*;
 import lejos.robotics.SampleProvider;
 import lejos.robotics.filter.MedianFilter;
-import lejos.hardware.Sound;
+import lejos.hardware.Sound; // TODO Remove sound package.
 
 public class OdometryCorrection implements Runnable {
   private static final long CORRECTION_PERIOD = 100;
@@ -26,12 +26,31 @@ public class OdometryCorrection implements Runnable {
       
       if (colorSample[0] - lastSample[0] < MIN_INTENSITY_DIFF) { // If the ground is dark than in previous samplings...
         
-        Sound.beep();
+        Sound.beep(); // TODO Remove beep.
         
-        // TODO Calculate new (accurate) robot position
-  
-        // TODO Update odometer with new calculated (and more accurate) values, eg:
-        //odometer.setXYT(0.3, 19.23, 5.0);
+        double[] position = ODOMETER.getXYT(); // Get position to identify which line has been crossed.
+        double correctedXPos = position[0];
+        double correctedYPos = position[1];
+        
+        if ( (position[2] > 315 && position[2] < 45) || (position[2] > 135 && position[2] < 225) ) { // Along Y axis.
+          if (position[1] < TILE_SIZE * 1.5) {
+            correctedYPos = 1*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.cos(Math.toRadians(position[2])));
+          } else if (position[1] < TILE_SIZE * 2.5) {
+            correctedYPos = 2*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.cos(Math.toRadians(position[2])));
+          } else {
+            correctedYPos = 3*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.cos(Math.toRadians(position[2])));
+          }
+        } else { // Along X axis.
+          if (position[0] < TILE_SIZE * 1.5) {
+            correctedYPos = 1*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.sin(Math.toRadians(position[2])));
+          } else if (position[0] < TILE_SIZE * 2.5) {
+            correctedYPos = 2*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.sin(Math.toRadians(position[2])));
+          } else {
+            correctedYPos = 3*TILE_SIZE - (COLOR_SENSOR_OFFSET * Math.sin(Math.toRadians(position[2])));
+          }
+        }
+        
+        ODOMETER.setXYT(correctedXPos, correctedYPos, position[2]);
           
       }
       
