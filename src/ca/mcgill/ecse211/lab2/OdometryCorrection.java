@@ -3,7 +3,7 @@ package ca.mcgill.ecse211.lab2;
 import static ca.mcgill.ecse211.lab2.Resources.*;
 import lejos.robotics.SampleProvider;
 import lejos.robotics.filter.MedianFilter;
-import lejos.hardware.Sound; // TODO Remove sound package.
+import lejos.hardware.Sound;
 
 public class OdometryCorrection implements Runnable {
   private static final long CORRECTION_PERIOD = 100;
@@ -26,7 +26,7 @@ public class OdometryCorrection implements Runnable {
       
       if (colorSample[0] - lastSample[0] < MIN_INTENSITY_DIFF) { // If the ground is dark than in previous samplings...
         
-        Sound.beep(); // TODO Remove beep.
+        Sound.beep(); // Audible indication that a line has been detected.
         
         double[] position = ODOMETER.getXYT(); // Get position to identify which line has been crossed.
         double correctedXPos = position[0]; // Initialize correction.

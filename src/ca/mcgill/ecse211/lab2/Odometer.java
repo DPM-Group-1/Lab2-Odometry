@@ -36,11 +36,6 @@ public class Odometer implements Runnable {
   private volatile double theta; // Head angle
   
   /**
-   * The (x, y, theta) position as an array
-   */
-  private double[] position;
-  
-  /**
    * Last tachometer count of the left and right motor.
    */
   private static int lastLeftMotorTachoCount = 0;
