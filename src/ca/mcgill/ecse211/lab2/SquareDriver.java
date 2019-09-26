@@ -26,14 +26,14 @@ public class SquareDriver {
     for (int i = 0; i < 4; i++) {
       // drive forward three tiles
       LEFT_MOTOR.setSpeed(FORWARD_SPEED);
-      RIGHT_MOTOR.setSpeed(FORWARD_SPEED);
+      RIGHT_MOTOR.setSpeed(FORWARD_SPEED + SPEED_DELTA);
 
       LEFT_MOTOR.rotate(convertDistance(3 * TILE_SIZE), true);
       RIGHT_MOTOR.rotate(convertDistance(3 * TILE_SIZE), false);
 
       // turn 90 degrees clockwise
       LEFT_MOTOR.setSpeed(ROTATE_SPEED);
-      RIGHT_MOTOR.setSpeed(ROTATE_SPEED);
+      RIGHT_MOTOR.setSpeed(ROTATE_SPEED + SPEED_DELTA);
 
       LEFT_MOTOR.rotate(convertAngle(90.0), true);
       RIGHT_MOTOR.rotate(-convertAngle(90.0), false);

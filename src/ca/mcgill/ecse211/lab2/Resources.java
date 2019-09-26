@@ -33,6 +33,11 @@ public class Resources {
    */
   public static final int ROTATE_SPEED = 150;
   
+  /*
+   * Differential of the right and left motor to compensate for faulty hardware.
+   */
+  public static final int SPEED_DELTA = 1; // This is equal to RightMotorSpeed - LeftMotorSpeed.
+  
   /**
    * The tile size in centimeters.
    */
