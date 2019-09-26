@@ -21,7 +21,7 @@ public class Main {
     int buttonChoice;
 
     // Odometer related objects
-    OdometryCorrection odoCorrection = new OdometryCorrection(); // TODO Complete implementation
+    OdometryCorrection odoCorrection = new OdometryCorrection();
     Display display = new Display(); // No need to change
 
     do {
